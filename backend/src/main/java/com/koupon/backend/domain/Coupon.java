@@ -1,6 +1,6 @@
 // koupon/backend/src/main/java/com/koupon/backend/domain/Coupon.java
 
-package main.java.com.koupon.backend.domain;
+package com.koupon.backend.domain;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -7,7 +7,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage />} />
         {/* 다음엔 /coupon, /admin, /mypage 추가 예정 */}
       </Routes>
     </BrowserRouter>

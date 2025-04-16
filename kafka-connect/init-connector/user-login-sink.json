@@ -1,0 +1,22 @@
+{
+  "name": "user-login-sink",
+  "config": {
+    "topics": "user-login",
+    "table.name.format": "user_login",
+    "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+    "connection.driver": "com.mysql.cj.jdbc.Driver",
+    "connection.url": "jdbc:mysql://mysql:3306/coupon",
+    "connection.user": "user",
+    "connection.password": "password",
+    "tasks.max": "1",
+    "insert.mode": "insert",
+    "auto.create": "false",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "true",
+    "pk.mode": "record_value",
+    "pk.fields": "user_id,login_at"
+    
+  }
+}
+

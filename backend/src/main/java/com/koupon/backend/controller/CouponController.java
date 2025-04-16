@@ -1,12 +1,12 @@
 // koupon/backend/src/main/java/com/koupon/backend/controller/CouponController.java
 
-package main.java.com.koupon.backend.controller;
+package com.koupon.backend.controller;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import lombok.RequiredArgsConstructor;
-import main.java.com.koupon.backend.service.CouponService;
-import main.java.com.koupon.backend.dto.CouponRequestDto;
+import com.koupon.backend.service.CouponService;
+import com.koupon.backend.dto.CouponRequestDto;
 
 @RestController
 @RequestMapping("/coupon")
