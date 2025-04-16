@@ -44,3 +44,6 @@ dependency-reduced-pom.xml
 
 # Kafka Connect plugin jars (if mounted)
 kafka-connect-plugins/libs/
+
+# Spring Boot
+*.jar
