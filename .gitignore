@@ -1,0 +1,46 @@
+# Java / Spring Boot
+/build/
+/target/
+/out/
+
+# VSCode settings
+.vscode/
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+
+# Docker
+docker-compose.override.yml
+**/docker-compose.override.yml
+
+# Kafka local data
+kafka-data/
+zookeeper-data/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Maven (혹시 Maven이면)
+.mvn/
+.settings/
+dependency-reduced-pom.xml
+
+# Temporary files
+*.swp
+*.swo
+*.bak
+*.tmp
+*~
+
+# Kafka Connect plugin jars (if mounted)
+kafka-connect-plugins/libs/
