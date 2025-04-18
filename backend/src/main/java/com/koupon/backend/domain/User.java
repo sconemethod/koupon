@@ -7,23 +7,25 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+
 @Entity
-@Getter @Setter
-@NoArgsConstructor @AllArgsConstructor
+@Getter 
+@Setter
+@NoArgsConstructor 
+@AllArgsConstructor
 @Builder
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    private String email;
+  @Id
+  @Column(name = "user_id")
+  private String userId;  // ✅ PK를 String으로 변경!
 
-    private String nickname;
+  private String email;
+  private String nickname;
+  private LocalDateTime createdAt;
 
-    private LocalDateTime createdAt;
-
-    // (1) CouponIssue 테이블과 1:N 관계 설정
+    // (1) CouponUser 테이블과 1:N 관계 설정
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<CouponIssue> couponIssues;
+    private List<Coupon> coupon;
 }

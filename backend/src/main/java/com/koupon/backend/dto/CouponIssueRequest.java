@@ -1,6 +1,5 @@
 package com.koupon.backend.dto;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
@@ -11,7 +10,7 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor 
 
-@Data
-public class CouponRequestDto {
+public class CouponIssueRequest {
     private String userId;
+    private Long eventId;
 }

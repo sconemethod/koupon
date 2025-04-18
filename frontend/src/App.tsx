@@ -2,13 +2,16 @@
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
+import CouponPage from "./pages/CouponPage";
+import AdminEventPage from "./pages/AdminEventPage";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
-        {/* 다음엔 /coupon, /admin, /mypage 추가 예정 */}
+        <Route path="/coupon" element={<CouponPage />} />
+        <Route path="/admin/event" element={<AdminEventPage />} />
       </Routes>
     </BrowserRouter>
   );

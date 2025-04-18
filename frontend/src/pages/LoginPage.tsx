@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   const [userId, setUserId] = useState("");
@@ -56,7 +57,8 @@ const LoginPage = () => {
           <button onClick={handleLogin}>로그인</button>
         </>
       )}
-
+      <hr />
+      <Link to="/coupon">🎁 쿠폰 받으러 가기</Link>
       <hr />
 
       <h3>로그인 기록 (예시 테이블)</h3>

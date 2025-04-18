@@ -1,0 +1,27 @@
+{
+  "name": "coupon-issue-sink",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+    "tasks.max": "1",
+    "topics": "coupon-issue",
+
+    "connection.url": "jdbc:mysql://mysql:3306/coupon",
+    "connection.user": "root",
+    "connection.password": "password",
+
+    "insert.mode": "insert",
+    "auto.create": "false",
+
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "true",
+
+    "consumer.override.auto.offset.reset": "earliest",
+
+    "table.name.format": "coupon_user",
+
+    "pk.mode": "record_value",
+    "pk.fields": "user_id,coupon_code",
+    "fields.whitelist": "user_id,coupon_code,issued_at"
+  }
+}

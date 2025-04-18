@@ -8,16 +8,19 @@ import lombok.RequiredArgsConstructor;
 import com.koupon.backend.service.CouponService;
 import com.koupon.backend.dto.CouponRequestDto;
 
+
 @RestController
 @RequestMapping("/coupon")
 @RequiredArgsConstructor
+
 public class CouponController {
 
     private final CouponService couponService;
 
+    // 쿠폰 발급
     @PostMapping("/issue")
     public ResponseEntity<String> issueCoupon(@RequestBody CouponRequestDto dto) {
-        couponService.issueCoupon(dto.getUserId(), dto.getCouponId());
+        couponService.issueCoupon(dto.getUserId());
         return ResponseEntity.ok("Coupon issued!");
     }
 }
