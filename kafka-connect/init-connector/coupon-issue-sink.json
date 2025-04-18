@@ -16,9 +16,7 @@
     "value.converter": "org.apache.kafka.connect.json.JsonConverter",
     "value.converter.schemas.enable": "true",
 
-    "consumer.override.auto.offset.reset": "earliest",
-
-    "table.name.format": "coupon_user",
+    "table.name.format": "coupon",
 
     "pk.mode": "record_value",
     "pk.fields": "user_id,coupon_code",

@@ -6,21 +6,23 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import lombok.RequiredArgsConstructor;
 import com.koupon.backend.service.CouponService;
-import com.koupon.backend.dto.CouponRequestDto;
-
-
+import com.koupon.backend.dto.CouponIssueRequest;
+import com.koupon.backend.domain.Coupon;
+import org.springframework.data.redis.core.RedisTemplate;
 @RestController
-@RequestMapping("/coupon")
 @RequiredArgsConstructor
-
+@RequestMapping("/coupon")
 public class CouponController {
 
     private final CouponService couponService;
-
-    // 쿠폰 발급
+    private final RedisTemplate<String, String> redisTemplate;
     @PostMapping("/issue")
-    public ResponseEntity<String> issueCoupon(@RequestBody CouponRequestDto dto) {
-        couponService.issueCoupon(dto.getUserId());
-        return ResponseEntity.ok("Coupon issued!");
+    public ResponseEntity<?> issueCoupon(@RequestBody CouponIssueRequest request) {
+        try {
+            Coupon issued = couponService.issueCoupon(request.getUserId(), request.getEventId());
+            return ResponseEntity.ok("쿠폰 발급 성공! 🎟️ CODE: " + issued.getCouponCode());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("발급 실패 😢 " + e.getMessage());
+        }
     }
 }

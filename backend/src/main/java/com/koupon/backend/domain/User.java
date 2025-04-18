@@ -22,7 +22,9 @@ public class User {
   private String userId;  // ✅ PK를 String으로 변경!
 
   private String email;
+
   private String nickname;
+  
   private LocalDateTime createdAt;
 
     // (1) CouponUser 테이블과 1:N 관계 설정

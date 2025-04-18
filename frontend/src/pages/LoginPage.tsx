@@ -58,7 +58,7 @@ const LoginPage = () => {
         </>
       )}
       <hr />
-      <Link to="/coupon">🎁 쿠폰 받으러 가기</Link>
+      <Link to="/events">🎁 이벤트 보러 가기</Link>
       <hr />
 
       <h3>로그인 기록 (예시 테이블)</h3>

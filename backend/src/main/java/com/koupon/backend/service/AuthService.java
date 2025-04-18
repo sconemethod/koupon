@@ -8,14 +8,30 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.koupon.backend.domain.User;
+import com.koupon.backend.repository.UserRepository;
 
 @Service
 @RequiredArgsConstructor
 
 public class AuthService {
 
+    private final UserRepository userRepository;
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
+    // 유저가 없으면 저장
+    public void ensureUserExists(String userId) {
+      userRepository.findById(userId)
+          .orElseGet(() -> {
+              User user = new User();
+              user.setUserId(userId);
+              user.setCreatedAt(LocalDateTime.now());
+              user.setEmail(userId + "@dummy.email"); // 기본값
+              user.setNickname("Guest_" + userId);    // 기본 닉네임
+              return userRepository.save(user);
+          });
+  }
+    // 로그인 이력 user_login 토픽으로 발송
     public void sendLoginEvent(String userId) {
         List<Map<String, Object>> fields = new ArrayList<>();
         Map<String, Object> field1 = new HashMap<>();
