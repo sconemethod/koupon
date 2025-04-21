@@ -26,6 +26,10 @@ const EventListPage = () => {
         {events.map(event => (
           <li key={event.eventId}>
             <Link to={`/events/${event.eventId}`}>{event.eventName}</Link>
+            &nbsp;|&nbsp;
+            <Link to={`/admin/event/edit/${event.eventId}`}>
+              ✏️ 수정
+            </Link>
           </li>
         ))}
       </ul>

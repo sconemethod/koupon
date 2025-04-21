@@ -6,6 +6,7 @@ import CouponPage from "./pages/CouponPage";
 import AdminEventPage from "./pages/AdminEventPage";
 import EventListPage from "./pages/EventListPage";
 import EventDetailPage from "./pages/EventDetailPage";
+import EventEditPage from "./pages/EventEditPage";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/admin/event" element={<AdminEventPage />} />
+        <Route path="/admin/event/edit/:id" element={<EventEditPage />} />
         <Route path="/events" element={<EventListPage />} />
         <Route path="/events/:id" element={<EventDetailPage />} />
         <Route path="/events/:id/coupon" element={<CouponPage />} />

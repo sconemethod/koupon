@@ -1,16 +1,15 @@
 package com.koupon.backend.controller;
-
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import lombok.RequiredArgsConstructor;
-
 import com.koupon.backend.domain.Event;
 import com.koupon.backend.repository.EventRepository;
 import com.koupon.backend.dto.EventRequestDto;
-
+import java.util.Optional;
 import java.time.LocalDateTime;
 import org.springframework.data.redis.core.RedisTemplate;
 import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class EventController {
@@ -39,6 +38,39 @@ public class EventController {
  
          return ResponseEntity.ok("쿠폰 이벤트가 성공적으로 생성되었습니다!");
      }
+
+     // ✅ 관리자용: 이벤트 수정
+     @PutMapping("/admin/event/{id}")
+     public ResponseEntity<String> updateEvent(@PathVariable Long id, @RequestBody EventRequestDto dto) {
+         Optional<Event> optionalEvent = eventRepository.findById(id);
+         if (optionalEvent.isEmpty()) {
+             return ResponseEntity.notFound().build();
+         }
+     
+         Event event = optionalEvent.get();
+     
+         // ✅ 기존 발급 수량 계산
+         int issued = event.getTotalQuantity() - event.getRemainingQuantity();
+     
+         // ✅ 필드 업데이트
+         event.setDescription(dto.getDescription());
+         event.setStartTime(dto.getStartTime());
+         event.setEndTime(dto.getEndTime());
+         event.setTotalQuantity(dto.getTotalQuantity());
+     
+         // ✅ 남은 수량 재계산 (최소 0 보장)
+         int newRemaining = Math.max(dto.getTotalQuantity() - issued, 0);
+         event.setRemainingQuantity(newRemaining);
+     
+         eventRepository.save(event);
+     
+         return ResponseEntity.ok("이벤트가 성공적으로 수정되었습니다!");
+     }
+     
+
+
+
+
  
      // ✅ 사용자용: 전체 이벤트 조회
      @GetMapping("/events")
