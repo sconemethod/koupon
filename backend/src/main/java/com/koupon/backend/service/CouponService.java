@@ -27,7 +27,7 @@ public class CouponService {
     private final EventRepository eventRepository;
     private final UserRepository userRepository;
 
-
+    @Transactional
     private final RedisTemplate<String, String> redisTemplate;
     public Coupon issueCoupon(String userId, Long eventId) {
         // 1. 유저 조회
