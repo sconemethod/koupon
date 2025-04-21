@@ -73,6 +73,11 @@ public class CouponService {
         // 7. Kafka 메시지 전송
         kafkaProducerService.sendCouponIssueEvent(userId, couponCode);
 
+        // 8. Redis 재고 차감 성공 후 → DB에서도 반영
+        event.setRemainingQuantity(event.getRemainingQuantity() - 1);
+        eventRepository.save(event);
+
+
         return coupon;
     }
 }
