@@ -8,6 +8,12 @@ spring:
     username: user
     password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 250   # 200 동시접속 + 여유
+      minimum-idle: 20
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      connection-timeout: 30000
   application:
     name: backend
   jpa:
