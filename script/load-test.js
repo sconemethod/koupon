@@ -15,7 +15,7 @@ async function issueCoupon(userId, eventId) {
 }
 
 (async () => {
-  const eventId = 5; // 테스트할 이벤트 ID
+  const eventId = 8; // 테스트할 이벤트 ID
   const users = Array.from({ length: CONCURRENT_USERS }, (_, i) => `testUser${i + 1}`);
   await Promise.all(users.map(userId => issueCoupon(userId, eventId)));
 })();
