@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-const USER_COUNT = 40;
+const USER_COUNT = 200;
 const API_URL = 'http://localhost:4000/auth/login';
 
 async function registerUser(userId) {
