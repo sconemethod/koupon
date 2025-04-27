@@ -51,6 +51,7 @@ dependencies {
 	testImplementation "org.testcontainers:mysql:1.19.4"
 }
 
-tasks.named('test') {
+
+tasks.named('test') {  // JUnit5 활성화
 	useJUnitPlatform()
 }

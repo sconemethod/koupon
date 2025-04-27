@@ -60,8 +60,8 @@ jobs:
 
       # 테스트 실패시 확인    
       - name: Upload Test Report
-      if: failure()            # 실패 때만
-      uses: actions/upload-artifact@v3
-      with:
-        name: junit-report
-        path: backend/build/reports/tests/test
+        if: failure()            # 실패 때만
+        uses: actions/upload-artifact@v3
+        with:
+          name: junit-report
+          path: backend/build/reports/tests/test
