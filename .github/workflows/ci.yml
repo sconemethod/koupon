@@ -36,6 +36,13 @@ jobs:
           distribution: temurin
           java-version: 17
 
+      # docker demon 활성화 
+      - name: Ensure Docker daemon running
+        run: |
+          sudo systemctl start docker
+          docker info
+        
+
       # 5) Gradle 빌드 & 테스트
       - name: Gradle Build & Test
         working-directory: backend         # ← build.gradle 이 있는 디렉터리
@@ -50,3 +57,11 @@ jobs:
         run: |
           terraform destroy -auto-approve \
           -var="mysql_root_password=${{ secrets.MYSQL_ROOT_PASSWORD }}"
+
+      # 테스트 실패시 확인    
+      - name: Upload Test Report
+      if: failure()            # 실패 때만
+      uses: actions/upload-artifact@v3
+      with:
+        name: junit-report
+        path: backend/build/reports/tests/test
