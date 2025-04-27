@@ -51,6 +51,11 @@ dependencies {
 	testImplementation "org.testcontainers:mysql:1.19.4"
 }
 
+tasks.named('bootRun') {
+    if (project.hasProperty('MYSQL_PASSWORD')) {
+        environment "MYSQL_PASSWORD", project.property('MYSQL_PASSWORD')
+    }
+}
 
 tasks.named('test') {  // JUnit5 활성화
 	useJUnitPlatform()
