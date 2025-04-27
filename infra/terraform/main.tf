@@ -8,7 +8,10 @@ resource "docker_image" "redis" {
 resource "docker_container" "redis" {
   name  = "koupon-redis"
   image = docker_image.redis.image_id
-  ports { internal = 6379 external = 6379 }
+  ports { 
+    internal = 6379 
+    external = 6379 
+  }
 }
 
 ###############
@@ -30,7 +33,10 @@ resource "docker_container" "mysql" {
     "MYSQL_ROOT_HOST=%"
   ]
 
-  ports { internal = 3306 external = 3306 }
+  ports { 
+    internal = 3306 
+    external = 3306 
+  }
   healthcheck {
     test = ["CMD", "mysqladmin" ,"-uuser", "-ppassword", "ping", "-h", "127.0.0.1"]
   }
@@ -47,7 +53,10 @@ resource "docker_container" "zookeeper" {
   name  = "koupon-zookeeper"
   image = docker_image.zookeeper.image_id
   env   = ["ZOOKEEPER_CLIENT_PORT=2181"]
-  ports { internal = 2181 external = 2181 }
+  ports { 
+    internal = 2181 
+    external = 2181 
+    }
 }
 
 ###############
@@ -71,5 +80,8 @@ resource "docker_container" "kafka" {
     "KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1"
   ]
 
-  ports { internal = 9092 external = 9092 }
+  ports { 
+    internal = 9092 
+    external = 9092 
+    }
 }
