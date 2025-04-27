@@ -1,4 +1,4 @@
-package koupon.backend.src.test.java.com.koupon.backend;
+package com.koupon.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,9 +9,8 @@ import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-
+@SpringBootTest(classes = BackendApplication.class)  // ← main 클래스 명시
 @Testcontainers          // ① Testcontainers JUnit5 확장 활성화
-@SpringBootTest
 class BackendApplicationTests {
 
     // ② MySQL 8.3 컨테이너 정의
