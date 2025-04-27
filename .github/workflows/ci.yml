@@ -1,0 +1,50 @@
+name: Koupon CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      TF_IN_AUTOMATION:       "1"
+      TF_VAR_mysql_password:  ${{ secrets.MYSQL_PASSWORD }}   # Terraform 변수 주입
+      DB_PASSWORD:            ${{ secrets.MYSQL_PASSWORD }}   # Spring Boot가 읽을 값
+
+    steps:
+      # 1) 코드 체크아웃
+      - uses: actions/checkout@v4
+
+      # 2) Terraform 설치
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.7.5"
+
+      # 3) 인프라 기동
+      - name: Terraform Init & Apply
+        working-directory: infra/terraform
+        run: |
+          terraform init
+          terraform apply -auto-approve \
+            -var="mysql_root_password=${{ secrets.MYSQL_ROOT_PASSWORD }}"
+
+      # 4) JDK 설치
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      # 5) 스프링 부트 빌드 & 테스트
+      - name: Build & Test
+        working-directory: backend
+        run: mvn -B clean verify
+
+      # 6) 인프라 제거 (항상 실행)
+      - name: Terraform Destroy
+        if: always()
+        working-directory: infra/terraform
+        run: |
+          terraform destroy -auto-approve \
+            -var="mysql_root_password=${{ secrets.MYSQL_ROOT_PASSWORD }}"
