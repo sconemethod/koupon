@@ -58,12 +58,12 @@ jobs:
           terraform destroy -auto-approve \
           -var="mysql_root_password=${{ secrets.MYSQL_ROOT_PASSWORD }}"
 
-      # (빌드·테스트 실패 시에만 업로드)
       - name: Upload Test Report
-        if: failure()                       # 실패할 때만 실행
-        uses: actions/upload-artifact@v3.1.2
+        if: failure()
+        uses: actions/upload-artifact@v3      # 또는 @v4
         with:
           name: junit-report
           path: backend/build/reports/tests/test
+      
 
 
